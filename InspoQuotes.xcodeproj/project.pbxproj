@@ -12,6 +12,7 @@
 		B5DA24892236D9DF00AB0C5B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5DA24872236D9DF00AB0C5B /* Main.storyboard */; };
 		B5DA248B2236D9E000AB0C5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5DA248A2236D9E000AB0C5B /* Assets.xcassets */; };
 		B5DA248E2236D9E000AB0C5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5DA248C2236D9E000AB0C5B /* LaunchScreen.storyboard */; };
+		B5DA24962236DB2000AB0C5B /* QuoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA24952236DB2000AB0C5B /* QuoteTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +23,7 @@
 		B5DA248A2236D9E000AB0C5B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B5DA248D2236D9E000AB0C5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5DA248F2236D9E000AB0C5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B5DA24952236DB2000AB0C5B /* QuoteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 			children = (
 				B5DA24832236D9DF00AB0C5B /* AppDelegate.swift */,
 				B5DA24852236D9DF00AB0C5B /* ViewController.swift */,
+				B5DA24952236DB2000AB0C5B /* QuoteTableViewController.swift */,
 				B5DA24872236D9DF00AB0C5B /* Main.storyboard */,
 				B5DA248A2236D9E000AB0C5B /* Assets.xcassets */,
 				B5DA248C2236D9E000AB0C5B /* LaunchScreen.storyboard */,
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B5DA24862236D9DF00AB0C5B /* ViewController.swift in Sources */,
+				B5DA24962236DB2000AB0C5B /* QuoteTableViewController.swift in Sources */,
 				B5DA24842236D9DF00AB0C5B /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
