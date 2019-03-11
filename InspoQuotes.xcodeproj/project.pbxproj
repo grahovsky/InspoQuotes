@@ -13,6 +13,7 @@
 		B5DA248B2236D9E000AB0C5B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B5DA248A2236D9E000AB0C5B /* Assets.xcassets */; };
 		B5DA248E2236D9E000AB0C5B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B5DA248C2236D9E000AB0C5B /* LaunchScreen.storyboard */; };
 		B5DA24962236DB2000AB0C5B /* QuoteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B5DA24952236DB2000AB0C5B /* QuoteTableViewController.swift */; };
+		B5DA24992236E51400AB0C5B /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5DA24982236E51300AB0C5B /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		B5DA248D2236D9E000AB0C5B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		B5DA248F2236D9E000AB0C5B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		B5DA24952236DB2000AB0C5B /* QuoteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuoteTableViewController.swift; sourceTree = "<group>"; };
+		B5DA24982236E51300AB0C5B /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B5DA24992236E51400AB0C5B /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -42,6 +45,7 @@
 			children = (
 				B5DA24822236D9DF00AB0C5B /* InspoQuotes */,
 				B5DA24812236D9DF00AB0C5B /* Products */,
+				B5DA24972236E51300AB0C5B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +69,14 @@
 				B5DA248F2236D9E000AB0C5B /* Info.plist */,
 			);
 			path = InspoQuotes;
+			sourceTree = "<group>";
+		};
+		B5DA24972236E51300AB0C5B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B5DA24982236E51300AB0C5B /* StoreKit.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -99,6 +111,11 @@
 				TargetAttributes = {
 					B5DA247F2236D9DF00AB0C5B = {
 						CreatedOnToolsVersion = 10.1;
+						SystemCapabilities = {
+							com.apple.InAppPurchase = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
