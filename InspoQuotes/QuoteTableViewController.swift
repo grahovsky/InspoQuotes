@@ -10,6 +10,8 @@ import UIKit
 
 class QuoteTableViewController: UITableViewController {
 
+    var buyPremium = false
+    
     var quotesToShow = [
         "Our greatest glory is not in never falling, but in rising every time we fall. — Confucius",
         "All our dreams can come true, if we have the courage to pursue them. – Walt Disney",
@@ -35,66 +37,63 @@ class QuoteTableViewController: UITableViewController {
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return quotesToShow.count
+        if !buyPremium {
+            return quotesToShow.count + 1
+        } else {
+            return quotesToShow.count
+        }
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath)
         
-        cell.textLabel?.text = quotesToShow[indexPath.row]
-        cell.textLabel?.lineBreakMode = .byWordWrapping
-        cell.textLabel?.numberOfLines = 0
+        if indexPath.row < quotesToShow.count || buyPremium {
+            
+            cell.textLabel?.text = quotesToShow[indexPath.row]
+            cell.textLabel?.lineBreakMode = .byWordWrapping
+            cell.textLabel?.numberOfLines = 0
+            cell.textLabel?.textColor = UIColor.black
+            cell.accessoryType = .none
+            
+        } else {
+            
+            cell.textLabel?.text = "Get more Quotes"
+            cell.textLabel?.textColor = #colorLiteral(red: 0.1411764771, green: 0.3960784376, blue: 0.5647059083, alpha: 1)
+            cell.accessoryType = .disclosureIndicator
+        
+        }
         
         return cell
     }
     
-
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    
+    //MARK: - Table view delegate methods
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if indexPath.row == quotesToShow.count && !buyPremium {
+            
+            buyPremiumQuotes()
+            
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+        
     }
-    */
 
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
+    
+    //MARK: - In-App Purchase Methods
+    
+    func buyPremiumQuotes() {
+        
+        //        quotesToShow = quotesToShow + premiumQuotes
+        //        union = true
+        //        tableView.reloadData()
+        
     }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
+    
     @IBAction func restorePressed(_ sender: UIBarButtonItem) {
         
     }
