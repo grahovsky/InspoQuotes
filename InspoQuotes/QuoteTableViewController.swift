@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import StoreKit
 
-class QuoteTableViewController: UITableViewController {
-
+class QuoteTableViewController: UITableViewController, SKPaymentTransactionObserver {
+   
+    let produktID = "com.grahovsky.InspoQuotes.PremiumQuotes"
+    
     var buyPremium = false
     
     var quotesToShow = [
@@ -32,6 +35,8 @@ class QuoteTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+         SKPaymentQueue.default().add(self)
     }
 
     // MARK: - Table view data source
@@ -87,12 +92,46 @@ class QuoteTableViewController: UITableViewController {
     
     func buyPremiumQuotes() {
         
+        if SKPaymentQueue.canMakePayments() {
+            
+            let paymentRequest = SKMutablePayment()
+            paymentRequest.productIdentifier = produktID
+            SKPaymentQueue.default().add(paymentRequest)
+           
+        } else {
+            print("User can't make payments")
+        }
+        
+        
+        
+        
+    }
+    
+    func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
+        
+        for transaction in transactions {
+            
+            if transaction.transactionState == .purchased {
+                //user payment sucessful
+                print("Transaction successful!")
+                SKPaymentQueue.default().finishTransaction(transaction)
+            } else if transaction.transactionState == .failed {
+                //payment failed
+                print("Transaction failed!")
+                if let error = transaction.error {
+                    let errorDescription = error.localizedDescription
+                    print("Transaction failed due to error: \(errorDescription)")
+                }
+                SKPaymentQueue.default().finishTransaction(transaction)
+            }
+            
+        }
+        
         //        quotesToShow = quotesToShow + premiumQuotes
         //        union = true
         //        tableView.reloadData()
         
     }
-    
     
     @IBAction func restorePressed(_ sender: UIBarButtonItem) {
         
