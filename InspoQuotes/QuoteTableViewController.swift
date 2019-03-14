@@ -13,8 +13,6 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
    
     let produktID = "com.grahovsky.InspoQuotes.PremiumQuotes"
     
-    var buyPremium = false
-    
     var quotesToShow = [
         "Our greatest glory is not in never falling, but in rising every time we fall. — Confucius",
         "All our dreams can come true, if we have the courage to pursue them. – Walt Disney",
@@ -36,13 +34,18 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
     override func viewDidLoad() {
         super.viewDidLoad()
         
-         SKPaymentQueue.default().add(self)
+        SKPaymentQueue.default().add(self)
+        
+        if isPurchased() {
+            showPremiumQuotes()
+        }
+        
     }
 
     // MARK: - Table view data source
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if !buyPremium {
+        if !isPurchased() {
             return quotesToShow.count + 1
         } else {
             return quotesToShow.count
@@ -53,7 +56,7 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "QuoteCell", for: indexPath)
         
-        if indexPath.row < quotesToShow.count || buyPremium {
+        if indexPath.row < quotesToShow.count {
             
             cell.textLabel?.text = quotesToShow[indexPath.row]
             cell.textLabel?.lineBreakMode = .byWordWrapping
@@ -77,7 +80,7 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if indexPath.row == quotesToShow.count && !buyPremium {
+        if indexPath.row == quotesToShow.count && !isPurchased() {
             
             buyPremiumQuotes()
             
@@ -102,9 +105,6 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
             print("User can't make payments")
         }
         
-        
-        
-        
     }
     
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
@@ -114,7 +114,11 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
             if transaction.transactionState == .purchased {
                 //user payment sucessful
                 print("Transaction successful!")
+                UserDefaults.standard.set(true, forKey: produktID)
                 SKPaymentQueue.default().finishTransaction(transaction)
+                
+                showPremiumQuotes()
+                
             } else if transaction.transactionState == .failed {
                 //payment failed
                 print("Transaction failed!")
@@ -127,9 +131,27 @@ class QuoteTableViewController: UITableViewController, SKPaymentTransactionObser
             
         }
         
-        //        quotesToShow = quotesToShow + premiumQuotes
-        //        union = true
-        //        tableView.reloadData()
+        
+        
+    }
+    
+    func showPremiumQuotes() {
+        
+        quotesToShow.append(contentsOf: premiumQuotes)
+        tableView.reloadData()
+        
+    }
+    
+    func isPurchased() -> Bool {
+        
+        let purchaseStatus = UserDefaults.standard.bool(forKey: produktID)
+        if purchaseStatus {
+            print("Previously purchased")
+            return true
+        } else {
+            print("Never purchased")
+            return false
+        }
         
     }
     
